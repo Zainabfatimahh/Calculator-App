@@ -13,17 +13,17 @@ export default function Calculator() {
 
   const theme = isDark ? dark : light;
 
-  // add value
+
   const press = (val) => setInput((prev) => prev + val);
 
 
-  // clear all
+ 
   const clear = () => setInput("");
 
-  // erase last character
+
   const erase = () => setInput((prev) => prev.slice(0, -1));
 
-  // calculate result
+  
   const calculate = () => {
     try {
       const result = eval(input);
@@ -59,14 +59,14 @@ export default function Calculator() {
 </View>
 
 
-      {/* DISPLAY */}
+      
       <View style={[styles.display, { backgroundColor: theme.display }]}>
         <Text style={[styles.displayText, { color: theme.result }]}>
           {input ||"_"}
         </Text>
       </View>
 
-      {/* KEYPAD */}
+      
       <View style={styles.keypad}>
         {buttons.map((row, i) => (
           <View key={i} style={styles.row}>
@@ -130,7 +130,7 @@ export default function Calculator() {
   );
 }
 
-
+//styling of calculator , Dark and light themes
 const dark = {
   bg: "#0b0b0b",
   display: "#111",
