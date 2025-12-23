@@ -9,7 +9,7 @@ import {
 
 export default function Calculator() {
   const [input, setInput] = useState("");
-  const [isDark, setIsDark] = useState(false); // light by default
+  const [isDark, setIsDark] = useState(false);
 
   const theme = isDark ? dark : light;
 
@@ -50,7 +50,7 @@ export default function Calculator() {
     <Text
       style={{
         fontSize: 18,
-        color: isDark ? "#111111" : "#ff8fab", // PINK (not red)
+        color: isDark ? "#111111" : "#ff8fab", 
       }}
     >
       🎀
@@ -98,7 +98,7 @@ export default function Calculator() {
           </View>
         ))}
 
-        {/* BOTTOM ROW */}
+        
         <View style={styles.row}>
           <TouchableOpacity
             style={[
@@ -108,7 +108,7 @@ export default function Calculator() {
             onPress={clear}
           >
             <Text style={[styles.buttonText, { color: theme.clearText }]}>
-              C
+              🗑️
             </Text>
           </TouchableOpacity>
 
@@ -130,7 +130,7 @@ export default function Calculator() {
   );
 }
 
-/* THEMES */
+
 const dark = {
   bg: "#0b0b0b",
   display: "#111",
@@ -159,9 +159,9 @@ const light = {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    padding: 20,
-    paddingTop: 60,
-    borderRadius: 30,
+    padding: 30,
+    paddingTop: 80,
+    borderRadius: 0,
   },
   toggleRow: {
     flexDirection: "row",
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   },
   keypad: {
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: "center",
   },
   row: {
     flexDirection: "row",
@@ -197,10 +197,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   
-    // 🌟 3D SHADOW (Android + iOS)
-    elevation: 6, // Android depth
+   
+    elevation: 6, 
   
-    shadowColor: "#000", // iOS shadow
+    shadowColor: "#000", 
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.25,
     shadowRadius: 6,
@@ -208,14 +208,14 @@ const styles = StyleSheet.create({
   
   buttonText: {
     fontSize: 26,
-    fontWeight: "500",   // stronger than 400
+    fontWeight: "500",   
     color: "#000",
-    letterSpacing: 0.3,  // cleaner numbers
+    letterSpacing: 0.3,  
   },
   
   equalText: {
-    fontSize: 28,        // slightly bigger for importance
-    fontWeight: "900",   // bold emphasis
+    fontSize: 28,       
+    fontWeight: "900",   
     color: "#000",
   },
 })
