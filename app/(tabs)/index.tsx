@@ -1,98 +1,221 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native";
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+export default function Calculator() {
+  const [input, setInput] = useState("");
+  const [isDark, setIsDark] = useState(false); // light by default
 
-export default function HomeScreen() {
+  const theme = isDark ? dark : light;
+
+  // add value
+  const press = (val) => setInput((prev) => prev + val);
+
+
+  // clear all
+  const clear = () => setInput("");
+
+  // erase last character
+  const erase = () => setInput((prev) => prev.slice(0, -1));
+
+  // calculate result
+  const calculate = () => {
+    try {
+      const result = eval(input);
+      setInput(String(result));
+    } catch {
+      setInput("Error");
+    }
+  };
+
+  const buttons = [
+    ["1", "2", "3", "🧹"],
+    ["4", "5", "6", "×"],
+    ["7", "8", "9", "-"],
+    ["0", "/", ".", "+"],
+  ];
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <View style={[styles.screen, { backgroundColor: theme.bg }]}>
+   <StatusBar barStyle="light-content" />
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+
+   <View style={styles.toggleRow}>
+  <TouchableOpacity onPress={() => setIsDark(!isDark)}>
+    <Text
+      style={{
+        fontSize: 18,
+        color: isDark ? "#111111" : "#ff8fab", // PINK (not red)
+      }}
+    >
+      🎀
+    </Text>
+  </TouchableOpacity>
+</View>
+
+
+      {/* DISPLAY */}
+      <View style={[styles.display, { backgroundColor: theme.display }]}>
+        <Text style={[styles.displayText, { color: theme.result }]}>
+          {input ||"_"}
+        </Text>
+      </View>
+
+      {/* KEYPAD */}
+      <View style={styles.keypad}>
+        {buttons.map((row, i) => (
+          <View key={i} style={styles.row}>
+            {row.map((btn) => (
+              <TouchableOpacity
+                key={btn}
+                style={[
+                  styles.button,
+                  {
+                    backgroundColor:
+                      btn === "+" ||
+                      btn === "-" ||
+                      btn === "×" ||
+                      btn === "🧹"
+                        ? theme.operator
+                        : theme.button,
+                  },
+                ]}
+                onPress={() => {
+                  if (btn === "🧹") erase();
+                  else press(btn === "×" ? "*" : btn);
+                }}
+              >
+                <Text style={[styles.buttonText, { color: theme.text }]}>
+                  {btn}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        ))}
+
+        {/* BOTTOM ROW */}
+        <View style={styles.row}>
+          <TouchableOpacity
+            style={[
+              styles.button,
+              { flex: 1, backgroundColor: theme.clear },
+            ]}
+            onPress={clear}
+          >
+            <Text style={[styles.buttonText, { color: theme.clearText }]}>
+              C
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[
+              styles.button,
+              {
+                backgroundColor: theme.equal,
+                marginLeft: 16,
+              },
+            ]}
+            onPress={calculate}
+          >
+            <Text style={styles.equalText}>=</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
   );
 }
 
+/* THEMES */
+const dark = {
+  bg: "#0b0b0b",
+  display: "#111",
+  button: "#1c1c1c",
+  operator: "#232323",
+  clear: "#2a2a2a",
+  equal: "#ffb4a2",
+  text: "#e5e5e5",
+  clearText: "#ff6b6b",
+  result: "#ffffff",
+};
+
+const light = {
+  bg: "#fdecef",
+  display: "#f8d7dd",
+  button: "#f8d7dd",
+  operator: "#f4b6c2",
+  clear: "#f1a7b8",
+  equal: "#ff8fab",
+  text: "#3a0f1c",
+  clearText: "#7a1025",
+  result: "#7a1025",
+};
+
+/* STYLES */
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  screen: {
+    flex: 1,
+    padding: 20,
+    paddingTop: 60,
+    borderRadius: 30,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  toggleRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 18,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  display: {
+    height: 150,
+    borderRadius: 36,
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    padding: 20,
+    marginBottom: 30,
+    color:"#f8d7dd",
   },
-});
+  displayText: {
+    fontSize: 52,
+  },
+  keypad: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 20,
+  },
+
+  button: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    justifyContent: "center",
+    alignItems: "center",
+  
+    // 🌟 3D SHADOW (Android + iOS)
+    elevation: 6, // Android depth
+  
+    shadowColor: "#000", // iOS shadow
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+  },
+  
+  buttonText: {
+    fontSize: 26,
+    fontWeight: "500",   // stronger than 400
+    color: "#000",
+    letterSpacing: 0.3,  // cleaner numbers
+  },
+  
+  equalText: {
+    fontSize: 28,        // slightly bigger for importance
+    fontWeight: "900",   // bold emphasis
+    color: "#000",
+  },
+})
