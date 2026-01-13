@@ -1,50 +1,146 @@
-# Welcome to your Expo app 👋
+📱 Calculator App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A simple and intuitive Calculator App built with React Native (Expo). This app lets users perform basic arithmetic operations with a clean and responsive UI. Ideal as a beginner project to practice UI, state management, and logic in a mobile environment.
 
-## Get started
+🔍 Overview
 
-1. Install dependencies
+The Calculator App allows users to input numbers and perform basic mathematical operations such as:
 
-   ```bash
-   npm install
-   ```
+➕ Addition
 
-2. Start the app
+➖ Subtraction
 
-   ```bash
-   npx expo start
-   ```
+✖️ Multiplication
 
-In the output, you'll find options to open the app in a
+➗ Division
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+It is designed for mobile devices using React Native (Expo), making it easy to run on both Android and iOS simulators or devices.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+🚀 Features
 
-## Get a fresh project
+✔ Perform basic arithmetic calculations
+✔ Clear and reset functionality
+✔ Responsive button layout
+✔ Simple, user-friendly design
+✔ Built with React Native + Expo
 
-When you're ready, run:
+(Add or remove items depending on what your app actually supports.)
 
-```bash
-npm run reset-project
-```
+📦 Tech Stack
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+This project uses:
 
-## Learn more
+React Native
 
-To learn more about developing your project with Expo, look at the following resources:
+Expo CLI
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+JavaScript / TypeScript
 
-## Join the community
+Custom styling
 
-Join our community of developers creating universal apps.
+(Update based on your actual tech stack from the repo.)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+🖥️ Screenshots / Demo
+
+(Add screenshots or a GIF here showing the app in action — this helps people instantly see what your project looks like.)
+
+🚀 Getting Started (Run Locally)
+1. Clone the Repository
+git clone https://github.com/Zainabfatimahh/Calculator-App.git
+
+2. Install Dependencies
+cd Calculator-App
+npm install
+
+
+or if you use Yarn:
+
+yarn install
+
+3. Run the App
+
+To start the development server:
+
+npx expo start
+
+
+This will open Expo Dev Tools in your browser. From there you can run the app on:
+
+📱 Android Emulator
+
+📱 iOS Simulator
+
+📱 Expo Go app (Android / iOS)
+
+(Include instructions for Android Studio / Xcode if needed.)
+
+📁 Project Structure
+Calculator-App/
+├─ .vscode/
+├─ app/
+├─ assets/
+│   └─ images/
+├─ components/
+├─ constants/
+├─ hooks/
+├─ scripts/
+├─ README.md
+├─ package.json
+├─ app.json
+├─ eas.json
+└─ tsconfig.json
+
+
+(Modify this if your structure is different.)
+
+📌 Usage
+
+Launch the app via Expo.
+
+Tap numbers and operators to input calculations.
+
+Results display in real-time as you interact with buttons.
+
+🧠 What I Learned
+
+Describe what you learned during this project — e.g.:
+
+Handling state with React’s useState
+
+Creating reusable components
+
+Managing user input in mobile UI
+
+Structuring logic for calculation operations
+
+🎯 Next Steps / Improvements
+
+You might want to:
+
+Add theme support (light/dark mode)
+
+Enable advanced operations (percent, memory)
+
+Add animations on button press
+
+Save history of calculations
+
+🤝 Contributing
+
+Contributions are welcome! Feel free to:
+
+⭐ Star the repository
+
+Fork the project
+
+Create a feature branch
+
+Submit a pull request
+
+📜 License
+
+This project is open-source and available under the MIT License.
+
+💬 Feedback & Support
+
+If you have ideas for improvements or found a bug, open an Issue — I’d love your feedback!
